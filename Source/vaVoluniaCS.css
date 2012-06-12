@@ -1,0 +1,43 @@
+/****copyright notice	*************************************************
+ * 
+ * 	Original Project: VoluniApp
+ * 	Original File: vaVoluniaCS.css
+ * 	Copyright (C) 2012 Marco Jacopo Ferrarotti All Rights Reserved.
+ * 	Contact: marco.ferrarotti@gmail.com
+ * 	
+ * 	If you want to redistribute this program, preserve this copyright
+ * 	notice and add your own notice above.	
+ * 
+ ***copying permission	*************************************************
+ *
+ *	This file is part of VoluniApp.
+ *
+ *  VoluniApp is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  VoluniApp is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with VoluniApp.  If not, see <http://www.gnu.org/licenses/>.
+ *  
+ ***********************************************************************/
+ 
+html,body,.container,.middleCNT,.middleCTR
+{
+	color:transparent;
+	background-color:transparent;
+}
+#content,#c_map,#pu_fb,.seekAndMeet,.headerLeft,.headerRight .settings
+{
+	display: none;
+}
+#ch_panel
+{
+	color:white;
+	background-color:white;
+}

@@ -1,0 +1,93 @@
+ /****copyright notice	*************************************************
+ * 
+ * 	Original Project: VoluniApp
+ *	Version: 2.0
+ *
+ * 	Original Files: 
+ *			manifest.json
+ *
+ *			VoluniApp.js
+ *			VoluniAppPref.js
+ *			VoluniAppUtils.js
+ *
+ *			vaMainCS.js
+ *			vaVoluniaCS.js
+ *
+ *			vaMainCS.css
+ *			vaVoluniaCS.css
+ *
+ *			vaBckPg.html
+ *			vaPopPg.html
+ *
+ * 	Copyright (C) 2012 Marco Jacopo Ferrarotti All Rights Reserved.
+ * 	Contact: marco.ferrarotti@gmail.com
+ * 	
+ * 	If you want to redistribute this program, preserve this copyright
+ * 	notice and add your own notice above.	
+ * 
+ ***copying permission	*************************************************
+ *
+ *  	This file is part of VoluniApp.
+ *
+ *  	VoluniApp is free software: you can redistribute it and/or modify
+ *  	it under the terms of the GNU General Public License as published by
+ *  	the Free Software Foundation, either version 3 of the License, or
+ *  	(at your option) any later version.
+ *
+ *  	VoluniApp is distributed in the hope that it will be useful,
+ *  	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  	GNU General Public License for more details.
+ *
+ *  	You should have received a copy of the GNU General Public License
+ *  	along with VoluniApp.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ ***read me		*************************************************
+ *	  
+ *	VoluniApp is a Chrome application (plugin), its aim is to improove
+ *	the experience of Volunia Users giving a way to bring Volunia outside
+ *	of its own domain (www.volunia.com)!
+ *
+ *		O.o What can I do with VoluniApp ?
+ *
+ *	*You can surf on every website (also the ones that are blocked inside 
+ *	 Volunia) having full access to the chat!
+ *
+ *	*You have full access to the private chat!
+ *
+ *	*You can use the "reach me" function to reach other Users around the web
+ *
+ *	*You can see other Users online in the webpage that you are watching
+ *
+ *	*VoluniApp is a way to overcome the iframe problem and to bring Volunia
+ *	 with you around the web!
+ *	
+ *		O.o Settings:
+ *
+ *	Onece you have installed VoluniApp a small button near the address bar 
+ *	will appear, with that you can change the behaviour of VoluniApp:
+ *
+ *	*On/Off: if you want to disable for some time VoluniApp just turn it off!
+ *
+ *	*Show/Hide: you can choose to use a shortcut to show and hide VoluniApp or
+ *	 you can choose the autohide setting (VoluniApp will disappear when you click away)
+ *
+ *	*Volunia Button: if you enable this option a small button will be injected when 
+ *	 you are visiting www.volunia.com, this button will bring you outside Volunia 
+ *	(useful when you want to visit a website that does not support iframes)
+ *
+ *	*Adapt Content: an experimental feature to avoid overlapping between VoluniApp 
+ *	 and the webpage that you are visiting.
+ *
+ *		O.o Beta:
+ *
+ *	VoluniApp is still under testing, you can contact me whenever you want by 
+ *	mail (marco.ferrarotti@gmail.com) to submit bugs report, suggestions, collaboration 
+ *	proposal or whatever :)
+ *
+ *		O.o Thank You!
+ *
+ *	Thank you to have installed VoluniApp, I hope you will enjoy it !
+ *
+ *	-MaJac89-
+ ***********************************************************************/

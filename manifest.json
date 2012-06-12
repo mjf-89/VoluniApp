@@ -1,0 +1,63 @@
+/****copyright notice	*************************************************
+ * 
+ * 	Original Project: VoluniApp
+ * 	Original File: manifest.json
+ * 	Copyright (C) 2012 Marco Jacopo Ferrarotti All Rights Reserved.
+ * 	Contact: marco.ferrarotti@gmail.com
+ * 	
+ * 	If you want to redistribute this program, preserve this copyright
+ * 	notice and add your own notice above.	
+ * 
+ ***copying permission	*************************************************
+ *
+ *	This file is part of VoluniApp.
+ *
+ *  VoluniApp is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  VoluniApp is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with VoluniApp.  If not, see <http://www.gnu.org/licenses/>.
+ *  
+ ***********************************************************************/
+
+{
+	"name": "VoluniApp",
+    "version": "2.0",
+    "background_page": "Source/vaBckPg.html",
+    "description": "VoluniApp is a way to overcome the iframe problem and to bring Volunia with you around the web!",
+    "permissions":  [   
+                        "tabs","http://*/*", "https://*/*"
+                    ],
+    "icons":	{
+    				"32":"Resources/voluniapp32.png",
+    				"128":"Resources/voluniapp128.png"
+    			},
+    "browser_action":	{
+							"default_title": "VoluniApp",
+							"default_icon": "Resources/voluniapp32.png",
+							"popup": "Source/vaPopPg.html"
+						},
+    "content_scripts":  [{
+	                        "matches": ["http://*/*", "https://*/*"],
+	                        "exclude_globs": ["*://*.volunia.com/*"],
+	                        "run_at": "document_idle",
+	                        "all_frames": false,
+	                        "js": ["Source/jquery-1.7.2.js","Source/VoluniAppUtils.js","Source/VoluniAppPref.js","Source/VoluniApp.js","Source/vaMainCS.js"],
+	                        "css": ["Source/vaMainCS.css"]
+                        },
+                        {
+	                        "matches": ["*://*.volunia.com/*"],
+	                        "exclude_globs": ["*://secure.volunia.com/*"],
+	                        "run_at": "document_start",
+	                        "all_frames": true,
+	                        "js": ["Source/jquery-1.7.2.js","Source/VoluniAppUtils.js","Source/VoluniAppPref.js","Source/vaVoluniaCS.js"]
+                        }
+                        ]
+}

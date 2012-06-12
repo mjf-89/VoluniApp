@@ -1,0 +1,59 @@
+/****copyright notice	*************************************************
+ * 
+ * 	Original Project: VoluniApp
+ * 	Original File: vaMainCS.css
+ * 	Copyright (C) 2012 Marco Jacopo Ferrarotti All Rights Reserved.
+ * 	Contact: marco.ferrarotti@gmail.com
+ * 	
+ * 	If you want to redistribute this program, preserve this copyright
+ * 	notice and add your own notice above.	
+ * 
+ ***copying permission	*************************************************
+ *
+ *	This file is part of VoluniApp.
+ *
+ *  VoluniApp is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  VoluniApp is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with VoluniApp.  If not, see <http://www.gnu.org/licenses/>.
+ *  
+ ***********************************************************************/
+ 
+#vaWrp
+{	
+	color:transparent;
+	background-color:transparent;
+	
+	position:fixed;
+	top:0px;
+	right:0px;
+	width:100%; 
+	height:100%;
+	
+	border:none;
+	
+	margin:0px;
+	padding:0px;
+	
+	pointer-events:auto;
+}
+
+#vaFrm
+{
+	color:transparent;
+	background-color:transparent;
+	
+	width:100%;
+	height:100%;
+	border:none;
+	
+	pointer-events:auto;
+}
