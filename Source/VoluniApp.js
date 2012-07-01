@@ -108,6 +108,11 @@ VoluniApp.prototype.start = function (){
 		//bind a listener to the DOMReady event
 		$(document).ready(va.ready);
 		
+		//bind a listener to the beforeUnload event
+		$(window).bind("beforeunload.voluniapp",function(e){
+			va.beforeUnload(e);
+		});
+		
 		//bind a listener to the mousemove event (needed to understand if the mouse
 		//has to interact with Volunia or with the webpage)
 		$(document).bind("mousemove.voluniapp",function(e){
@@ -227,6 +232,22 @@ VoluniApp.prototype.ready = function(e){
 	//behind HTML elements
 	va.wModeFix();
 };
+
+
+/************************************************************************
+ * 	function beforeUnload(e)
+ * 	-arguments:
+ * 		Event e: the event Object that has fired;
+ * 	-return:
+ * 		/
+ * 	-behaviour:
+ * 		this is the listener binded to the onbeforeunload event;
+ ***********************************************************************/
+VoluniApp.prototype.beforeUnload = function(e){
+	//to fire possible unload events of Volunia (useful for example to have correct 
+	//cookies)
+	$(va.frm).attr("src","");
+}
 
 
 /************************************************************************
