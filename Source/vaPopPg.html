@@ -57,37 +57,7 @@
 	<script type="text/javascript" src="jquery-1.7.2.js"></script>
 	<script type="text/javascript" src="VoluniAppPref.js"></script>
 	
-	<script>
-		function setPref(pref,val) {
-			var msg = new Object();
-			msg["msg"] = "chgLS";
-			
-			switch(pref) {
-			case VoluniAppPref.ACTI:
-				msg[VoluniAppPref.ACTI] = val;
-				break;
-			case VoluniAppPref.HIDE:
-				msg[VoluniAppPref.HIDE] = val;
-				break;
-			case VoluniAppPref.BTT:
-				if($("input:checkbox[name=btt]")[0].checked)
-					val = VoluniAppPref.BTT_ON;
-				else
-					val = VoluniAppPref.BTT_OFF;
-				msg[VoluniAppPref.BTT] = val;
-				break;
-			case VoluniAppPref.ADAP:
-				if($("input:checkbox[name=adap]")[0].checked)
-					val = VoluniAppPref.ADAP_ON;
-				else
-					val = VoluniAppPref.ADAP_OFF;
-				msg[VoluniAppPref.ADAP] = val;
-				break;
-			}
-			
-			chrome.extension.sendRequest(msg);
-		}
-	</script>
+	<script type="text/javascript" src="vaPopPg.js"></script>
 </head>
 <body>
 	<form>
@@ -98,46 +68,24 @@
     </tr>
   	<tr>
     <th class="volCol" scope="row">On/Off</th>
-    	<td><input type="radio" name="acti" onclick="setPref('acti','_a_')">On</td>
-    	<td><input type="radio" name="acti" onclick="setPref('acti','_d_')"> Off</td>
+    	<td><input type="radio" name="acti" value="_a_">On</td>
+    	<td><input type="radio" name="acti" value="_d_">Off</td>
   	</tr>
   	<tr>
     <th class="volCol" scope="row">Show/Hide</th>
-    	<td><input type="radio" name="hide" onclick="setPref('hide','_a_')">Auto</td>
-    	<td><input type="radio" name="hide" onclick="setPref('hide','_s_')">alt+v</td>
+    	<td><input type="radio" name="hide" value="_a_">Auto</td>
+    	<td><input type="radio" name="hide" value="_s_">alt+v</td>
   	</tr>
   	<tr>
     <th class="volCol" scope="row">Volunia Button</th>
-    	<td><input type="checkbox" name="btt" onclick="setPref('btt',null)">Show VoluniApp button in www.volunia.com</td>
+    	<td><input type="checkbox" name="btt">Show VoluniApp button in www.volunia.com</td>
   	</tr>
   	<tr>
     <th class="volColEx" scope="row">Adapt Content [experimental]</th>
-    	<td><input type="checkbox" name="adap" onclick="setPref('adap',null)">Adapt Content</td>
+    	<td><input type="checkbox" name="adap">Adapt Content</td>
   	</tr>
 	</tbody>
 	</table>
 	</form>
-	
-	<script>
-  		if(localStorage.acti == VoluniAppPref.ACTI_ACTIVE)
-  			$('input:radio[name=acti]')[0].checked = true;
-  		else
-  			$('input:radio[name=acti]')[1].checked = true;
-  		
-  		if(localStorage.hide == VoluniAppPref.HIDE_AUTO)
-  			$('input:radio[name=hide]')[0].checked = true;
-  		else
-  			$('input:radio[name=hide]')[1].checked = true;
-  		
-  		if(localStorage.adap == VoluniAppPref.ADAP_ON)	
-  			$("input:checkbox[name=adap]")[0].checked = true;
-  		else
-  			$("input:checkbox[name=adap]")[0].checked = false;
-  			
-  		if(localStorage.btt == VoluniAppPref.BTT_ON)	
-  			$("input:checkbox[name=btt]")[0].checked = true;
-  		else
-  			$("input:checkbox[name=btt]")[0].checked = false;
-	</script>
 </body>
 </html>

@@ -27,37 +27,56 @@
  *  
  ***********************************************************************/
 
+
+/************************************************************************
+ * 	File that contains the manifest of the chrome extension
+ ***********************************************************************/
+ 
 {
-	"name": "VoluniApp",
-    "version": "2.0",
-    "background_page": "Source/vaBckPg.html",
-    "description": "VoluniApp is a way to overcome the iframe problem and to bring Volunia with you around the web!",
-    "permissions":  [   
-                        "tabs","http://*/*", "https://*/*"
-                    ],
-    "icons":	{
-    				"32":"Resources/voluniapp32.png",
-    				"128":"Resources/voluniapp128.png"
-    			},
-    "browser_action":	{
-							"default_title": "VoluniApp",
-							"default_icon": "Resources/voluniapp32.png",
-							"popup": "Source/vaPopPg.html"
-						},
-    "content_scripts":  [{
-	                        "matches": ["http://*/*", "https://*/*"],
-	                        "exclude_globs": ["*://*.volunia.com/*"],
-	                        "run_at": "document_idle",
-	                        "all_frames": false,
-	                        "js": ["Source/jquery-1.7.2.js","Source/VoluniAppUtils.js","Source/VoluniAppPref.js","Source/VoluniApp.js","Source/vaMainCS.js"],
-	                        "css": ["Source/vaMainCS.css"]
-                        },
-                        {
-	                        "matches": ["*://*.volunia.com/*"],
-	                        "exclude_globs": ["*://secure.volunia.com/*"],
-	                        "run_at": "document_start",
-	                        "all_frames": true,
-	                        "js": ["Source/jquery-1.7.2.js","Source/VoluniAppUtils.js","Source/VoluniAppPref.js","Source/vaVoluniaCS.js"]
-                        }
-                        ]
+	"manifest_version": 2,
+    
+    "name": "VoluniApp",
+	"version": "2.0.3",
+	"description": "VoluniApp is a way to overcome the iframe problem and to bring Volunia with you around the web!",
+    
+	"permissions":[   
+		"tabs","http://*/*", "https://*/*"
+	],
+	
+    "icons":{
+		"32":"Resources/voluniapp32.png",
+		"128":"Resources/voluniapp128.png"
+	},
+	
+    "browser_action":{
+		"default_title": "VoluniApp",
+		"default_icon": "Resources/voluniapp32.png",
+		"default_popup": "Source/vaPopPg.html"
+	},
+	
+	"background":{
+		"page": "Source/vaBckPg.html"
+	},
+	
+    "content_scripts":[{
+		"matches": ["http://*/*", "https://*/*"],
+		"exclude_globs": ["*://*.volunia.com/*"],
+		"run_at": "document_idle",
+		"all_frames": false,
+		"js": ["Source/jquery-1.7.2.js","Source/VoluniAppUtils.js","Source/VoluniAppPref.js","Source/VoluniApp.js","Source/vaMainCS.js"],
+		"css": ["Source/vaMainCS.css"]
+	},
+	{
+		"matches": ["*://*.volunia.com/*"],
+		"exclude_globs": ["*://secure.volunia.com/*"],
+		"run_at": "document_start",
+		"all_frames": true,
+		"js": ["Source/jquery-1.7.2.js","Source/VoluniAppUtils.js","Source/VoluniAppPref.js","Source/vaVoluniaCS.js"]
+	}],
+	
+    "web_accessible_resources":[
+		"Resources/voluniapp32.png",
+		"Resources/voluniapp128.png",
+		"Source/vaVoluniaCS.css"
+	]
 }
