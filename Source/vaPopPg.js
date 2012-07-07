@@ -52,10 +52,13 @@ function setPref(pref,val) {
             msg[VoluniAppPref.BTT] = val;
             break;
         case VoluniAppPref.ADAP:
-            if($("input:checkbox[name=adap]")[0].checked)
-                val = VoluniAppPref.ADAP_ON;
+            if(val==VoluniAppPref.ADAP_ON && $("input:checkbox[name=adap][value=_a_]")[0].checked)
+            	$("input:checkbox[name=adap][value=_z_]")[0].checked = false;
+            else if(val==VoluniAppPref.ADAP_ZOOM && $("input:checkbox[name=adap][value=_z_]")[0].checked)
+            	$("input:checkbox[name=adap][value=_a_]")[0].checked = false;
             else
                 val = VoluniAppPref.ADAP_OFF;
+            
             msg[VoluniAppPref.ADAP] = val;
             break;
     }
@@ -74,10 +77,18 @@ function initVal(){
 	else
 		$('input:radio[name=hide]')[1].checked = true;
 	 
-	if(localStorage.adap == VoluniAppPref.ADAP_ON)	
-		$("input:checkbox[name=adap]")[0].checked = true;
-	else
-		$("input:checkbox[name=adap]")[0].checked = false;
+	if(localStorage.adap == VoluniAppPref.ADAP_ON){
+		$("input:checkbox[name=adap][value=_a_]")[0].checked = true;
+		$("input:checkbox[name=adap][value=_z_]")[0].checked = false;
+	}
+	else if(localStorage.adap == VoluniAppPref.ADAP_ZOOM){
+		$("input:checkbox[name=adap][value=_a_]")[0].checked = false;
+		$("input:checkbox[name=adap][value=_z_]")[0].checked = true;
+	}
+	else{
+		$("input:checkbox[name=adap][value=_a_]")[0].checked = false;
+		$("input:checkbox[name=adap][value=_z_]")[0].checked = false;
+	}
 	 
 	if(localStorage.btt == VoluniAppPref.BTT_ON)	
 		$("input:checkbox[name=btt]")[0].checked = true;
@@ -94,7 +105,8 @@ function initHan(){
     
     $("input[name=btt]").click(function(){setPref('btt',null);});
     
-    $("input[name=adap]").click(function(){setPref('adap',null);});
+    $("input[name=adap][value=_a_]").click(function(){setPref('adap',"_a_");});
+    $("input[name=adap][value=_z_]").click(function(){setPref('adap',"_z_");});
 }
 
 $(document).ready(function(){

@@ -36,11 +36,11 @@
 	"manifest_version": 2,
     
     "name": "VoluniApp",
-	"version": "2.0.3",
+	"version": "2.0.5",
 	"description": "VoluniApp is a way to overcome the iframe problem and to bring Volunia with you around the web!",
     
 	"permissions":[   
-		"tabs","http://*/*", "https://*/*"
+		"tabs","bookmarks","http://*/*", "https://*/*"
 	],
 	
     "icons":{

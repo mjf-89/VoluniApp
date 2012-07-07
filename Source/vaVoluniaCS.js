@@ -153,28 +153,29 @@ chrome.extension.onRequest.addListener(function(request, sender, response){
  * 	-return:
  * 		/
  * 	-behaviour:
- * 		inject a <div> in the Header in order to print the name
+ * 		inject a <span> in the Header in order to print the name
  *		of the application
  ***********************************************************************/
 function setVoluniappDiv() {
-	//create the <div> element
-	var divVoluniapp = document.createElement("div");
-	divVoluniapp.innerHTML = "VOLUNIAPP v2.0";
+	//create the <span> element
+	var spanVoluniapp = document.createElement("span");
+	spanVoluniapp.innerHTML = "VOLUNIAPP v2.0";
 	
-	//set the position of the <div> with respect to the Header
-	$(divVoluniapp).css("position","absolute");
-	$(divVoluniapp).css("left","15%");
-	$(divVoluniapp).css("top","25%");
-	$(divVoluniapp).css("display","table-cell");
-	$(divVoluniapp).css("vertical-align","middle");
-	//set some properties of the <div> to adjust the apparence
-	$(divVoluniapp).css("font-family","Arial,Helvetica,sans-serif");
-	$(divVoluniapp).css("font-size",$(".headerCTR").height()*0.6+"px");
-	$(divVoluniapp).css("-webkit-user-select","none");
-	$(divVoluniapp).css("color","white");
+	//set the position of the <span> with respect to the Header
+	$(spanVoluniapp).css("float","left");
+	$(spanVoluniapp).css("padding-left","100px");
+	$(spanVoluniapp).css("text-align","left");
+	$(spanVoluniapp).css("line-height",$(".headerCTR").height()+"px");
+	$(spanVoluniapp).css("vertical-align","middle");
+	//set some properties of the <span> to adjust the apparence
+	$(spanVoluniapp).css("width","auto");
+	$(spanVoluniapp).css("font-family","Arial,Helvetica,sans-serif");
+	$(spanVoluniapp).css("font-size",$(".headerCTR").height()*0.6+"px");
+	$(spanVoluniapp).css("-webkit-user-select","none");
+	$(spanVoluniapp).css("color","white");
 	
-	//append the <div> to the Header
-	$(".headerCNT").append(divVoluniapp);
+	//append the <span> to the Header
+	$(".logoHeader").append(spanVoluniapp);
 }
 
 
@@ -221,30 +222,110 @@ function setVoluniappBtt() {
 	chrome.extension.sendRequest({msg:"getLS"},function(response){
 		//check if the btt preference is set
 		if(response.ls.btt == VoluniAppPref.BTT_ON){
+			var popMenu = newPopMenu("VoluniApp");
+			newPopMenuElement(popMenu,"close Volunia (open VoluniApp)",function(){
+				//change the location to the url opened inside Volunia
+				window.location = VoluniAppUtils.getUrl(window.location.href.substr(window.location.href.lastIndexOf("rid=")+4));
+				//open VoluniApp
+				chrome.extension.sendRequest({msg:"setLS",stat:VoluniAppPref.STAT_OPEN});
+			});
+			
+			newPopMenuElement(popMenu,"bookmark current page",function(){
+				chrome.extension.sendRequest({msg:"bookmark",title:$("head>title").text(),url:VoluniAppUtils.getUrl(window.location.href.substr(window.location.href.lastIndexOf("rid=")+4))});
+			});
+			
 			//create the button (<li> element)
 			var voluniappBtt = document.createElement("li");
 			$(voluniappBtt).attr("id","voluniappBtt");
 			$(voluniappBtt).attr("title","open VoluniAPP");
 			$(voluniappBtt).css("cursor","pointer");
 			
+			$(voluniappBtt).append(popMenu);
+			$(popMenu).hide();
+			
 			//bind the listener for the click event
 			$(voluniappBtt).click(function(){
-				//change the location to the url opened inside Volunia
-				window.location = VoluniAppUtils.getUrl(window.location.href.substr(window.location.href.indexOf("rid=")+4));
-				//open VoluniApp
-				chrome.extension.sendRequest({msg:"setLS",stat:VoluniAppPref.STAT_OPEN});
+				$(popMenu).toggle();
 			});
 			
 			//set some properties to adjust the apparence
-			$(voluniappBtt).css("width","20px");
 			var img = document.createElement("img");
 			$(img).attr("src",chrome.extension.getURL("Resources/voluniapp32.png"));
 			
 			//append the button to the Header
 			$(voluniappBtt).append(img);
 			$(".headerRight .headerIcoList").append(voluniappBtt);
+			
+			//adjust the min-width of the headerCNT
+			$(".headerCNT").css("min-width",parseInt($(".headerCNT").css("min-width"))+50+"px");
 		}
 	});
+}
+
+
+/************************************************************************
+ * 	function newPopMenu(title)
+ * 	-arguments:
+ * 		title: title of the new menu;
+ * 	-return:
+ * 		/
+ * 	-behaviour:
+ * 		clone the "pop_account" menu from Volunia in order to have a
+ * 		new pop up menu in line with the style of Volunia
+ * 		The title of the new menu is set and all the other elements
+ * 		cloned from "pop_account" are dropped;
+ ***********************************************************************/
+function newPopMenu(title){
+	//clone the pop menu from Volunia
+	var newMenu = $("#pop_account").clone();
+	
+	//erease the id
+	$(newMenu).attr("id","");
+	
+	//drop all the elements of the menu except for the "title"
+	$(newMenu).find("iframe").detach();
+	$(newMenu).find("ul>li:not(:first)").detach();
+	
+	//set the title of the menu
+	$(newMenu).find("ul>li:first>div:first").css("padding","0px");
+	$(newMenu).find("ul>li:first>div:first").css("text-align","center");
+	$(newMenu).find("ul>li:first>div:first").html(title);
+	
+	//return the new menu
+	return newMenu;
+}
+
+
+/************************************************************************
+ * 	function newPopMenuElement(menu,title,f)
+ * 	-arguments:
+ * 		menu: popMenu where the new element has to be added;
+ * 		title: title of the new element;
+ * 		f: function to be executed on click;
+ * 	-return:
+ * 		/
+ * 	-behaviour:
+ * 		create a new element for a popMenu (obtained with the function
+ * 		getPopMenu() )
+ ***********************************************************************/
+function newPopMenuElement(menu,title,f){
+	//create the new "li" element
+	var newElement = document.createElement("li");
+	//create the anchor that will contain the title
+	var a = document.createElement("a");
+	
+	//set the element title
+	$(a).html(title);
+	//set the onClick function
+	$(a).click(f);
+	
+	//append the anchor to the element
+	$(newElement).append(a);
+	$(newElement).append($(document.createElement("div")).addClass("left"));
+	$(newElement).append($(document.createElement("div")).addClass("right"));
+	
+	//append the new element to the popMenu
+	$(menu).find("ul").append(newElement);
 }
 
 
@@ -334,7 +415,7 @@ function getResponseElement(jElement) {
  * 	-arguments:
  * 		/
  * 	-return:
- * 		size: object that holds the size of the 
+ * 		size: object that holds the size
  * 	-behaviour:
  * 		return the size of the free area (needed in order to adapt the 
  *		content of the webpage)

@@ -219,6 +219,7 @@ VoluniAppPref.HIDE_SHORT = "_s_";
 VoluniAppPref.ACTI_ACTIVE = "_a_";
 VoluniAppPref.ACTI_DEACTI = "_d_";
 VoluniAppPref.ADAP_ON = "_a_";
+VoluniAppPref.ADAP_ZOOM = "_z_";
 VoluniAppPref.ADAP_OFF = "_o_";
 VoluniAppPref.BTT_ON = "_y_";
 VoluniAppPref.BTT_OFF = "_n_";

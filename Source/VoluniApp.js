@@ -58,7 +58,8 @@ function VoluniApp() {
 	va.url = "";
 	//the rid of the page loaded into the voluniapp iframe
 	va.rid = "";
-	
+	//flag to know if the content is adapted
+	va.adap = false;
 	//extension preferences (the constructor send a request to get the 
 	//localStorage of the application)
 	va.pref = new VoluniAppPref(va);
@@ -101,7 +102,7 @@ VoluniApp.prototype.start = function (){
         va.init = true;
 		
         //append the wrapper to the body of the webpage
-        $("body").append(va.wrp);
+        $("html").append(va.wrp);
         //set the url of the iframe that contains Volunia to the current webpage
 		va.setFrmUrl(window.location.href);
 		
@@ -366,7 +367,7 @@ VoluniApp.prototype.adapt = function (x,y,w,h) {
 			$(va.wrp).detach();
 			//enclose everything inside a <div>
 			document.getElementsByTagName("body")[0].innerHTML="<div id=vaDimWrp>"+document.getElementsByTagName("body")[0].innerHTML+"</div>";
-			//reattach VoluniApp wrapper outside the above <div> 
+
 			$("body").append(va.wrp);
 		}
 		
@@ -427,13 +428,24 @@ VoluniApp.prototype.adapt = function (x,y,w,h) {
 				$(this).css("bottom",$(window).height()-b+"px");
 			}
 		});
+		
+		va.adap = true;
+	}
+	else if(va.pref.acti == VoluniAppPref.ACTI_ACTIVE && va.pref.adap == VoluniAppPref.ADAP_ZOOM) {
+		//---Zoom Adapt Test----
+		var zoom = w/$(window).width();
+		
+		$("body>*").filter(function(){return !$(this).is(va.wrp)}).css("-webkit-transform-origin","0 0");
+		$("body>*").filter(function(){return !$(this).is(va.wrp)}).css("-webkit-transform","matrix("+zoom+",0,0,"+zoom+",0,"+y+")");
+		
+		va.adap = true;
 	}
 	//if the "adap" preference is not set and the conten is adapted reload the page
-	else if(va.pref.adap == VoluniAppPref.ADAP_OFF && $("#vaDimWrp").parent().is("body")) {
+	else if(va.pref.adap == VoluniAppPref.ADAP_OFF && va.adap) {
 		window.location = "";
+		va.adap = false;
 	}
 };
-
 
 /************************************************************************
  * 	function mouseOver(x,y,tElement)
